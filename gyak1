@@ -1,0 +1,94 @@
+#include <iostream>
+#include <ctime>
+
+using namespace std;
+
+int main()
+{
+	const int N = 100;
+	srand((unsigned)time(NULL));
+	int i, dobas[N];
+	for (i = 0; i < N; i++)
+	{
+		dobas[i] = rand() % 11 + 2;
+		cout << dobas[i] << " ";
+	}
+	cout << endl;
+	//átlag
+	int sum = 0;
+	for (i = 0; i < N; i++)
+	{
+
+		sum += dobas[i];
+
+	}
+	cout << "Az atlag: " << (float)sum / N << endl;
+
+	//Volt e 12-es dobás
+	i = 0;
+	while (i < 122 && dobas[i] != 12)
+		i++;
+	if (i <= 99)
+	{
+		cout << "\nVolt 12-es";
+	}
+	else {
+		cout << "nem volt 12-es";
+	}
+
+	//páros páratlan
+	int paratlan = 0;
+
+	for (i = 0; i < N; i++)
+	{
+	}
+	if (dobas[i] % 2 != 0)
+	{
+	++paratlan;
+
+	cout << "paratlanokk szama: " << paratlan << "parosok szama: " << N - paratlan;
+	}
+	int mdobas[11] = { 0 };
+	for ( i = 0; i < N; i++)
+	{
+		mdobas[dobas[i] - 2]++;
+	}
+	for (i = 0; i < 11; i++)
+	{
+		cout << "\n a(z)" << i + 2 << "-es dobasok szama\t" << mdobas[i];
+	
+	}
+	//legnagyobb
+	int max=0;
+	for (i = 0; i < N; i++)
+	{
+		if (dobas[max] < dobas[i])
+			max = i;
+	}
+	cout << "\n a legnagyobb dobas sorszama: " << max + 1 << " erteke" << dobas[max];
+	//a legnagyobb dobások sorszámai
+	int gyujto[N], gydb = 0;
+	for (i = 0; i < N; i++)
+	{
+		if (dobas[i] == dobas[max])
+		{
+			gyujto[gydb] = i;
+			gydb++;
+		}
+	}
+		cout << " \n a legnagyobb dobások sorszámai: ";
+			for ( i = 0; i < gydb; i++)
+			
+				cout << gyujto[i] << 1 << " ";
+			
+	
+	return 0;
+
+
+
+
+
+
+
+
+}
