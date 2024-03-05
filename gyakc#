@@ -1,0 +1,47 @@
+namespace ConsoleApp1
+{
+	internal class Program
+	{
+		static void Main(string[] args)
+		{
+			bool ok = true;
+			int N = -1;
+			do
+			{
+				Console.WriteLine("N= ");
+				N=int.Parse(Console.ReadLine());
+				if(N<1)
+				{
+					Console.Write("nem jó!");
+					ok = false;
+				}else
+				{
+					ok=true;
+				}
+			}
+			while (!ok);
+			char irány='j';
+			
+			for (int i = 1; i < N; i++)
+			{
+				if (i % 7 == 0 || i % 10 == 7)
+				{
+					if(irány=='j')
+					{
+						irány = 'b';
+					}
+					else
+					{
+						irány = 'j';
+					}	
+						Console.Write("B" + irány + " ");
+				}
+				else
+				{
+						Console.Write(i+(irány+" "));
+				}
+			}
+			
+		}
+	}
+}
