@@ -1,0 +1,136 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+struct fordulo
+{
+	int ponta;
+	int pontb;
+	string csapata;
+	string csapatb;
+};
+
+int main()
+{
+	setlocale(LC_ALL, "");
+	ifstream be("fordulo.txt");
+	if (be.fail())
+	{
+		cerr << "hiba";
+		system("pause");
+		exit(1);
+	}
+
+	fordulo eredm[8];
+	int i = 0;
+	int pontsz = 0;
+	while (i < 8 && !be.eof())
+	{
+		be >> eredm[i].ponta;
+		be >> eredm[i].pontb;
+		be >> eredm[i].csapata;
+		be >> eredm[i].csapatb;
+		i++;
+		pontsz++;
+	}
+	be.close();
+	cout << endl;
+
+
+	cout << "\n\totthoni " << "\tvendég" << "\teredmény" << endl;
+	for (i = 0; i < pontsz; i++)
+	{
+		cout << "\n\t" << eredm[i].csapata << "\t" << eredm[i].csapatb << "\t" << eredm[i].ponta << " : " << eredm[i].pontb << endl;
+
+	}
+	int nyertesek = 0;
+	for (i = 0; i < pontsz; i++)
+	{
+
+		if (eredm[i].ponta > eredm[i].pontb)
+		{
+			nyertesek++;
+		}
+	}
+	cout << nyertesek << " csapat nyert otthon" << endl;
+	string maxcs;
+	int max = 0;
+	for (i = 0; i < pontsz; i++)
+	{
+		if (eredm[i].ponta > max)
+		{
+			max = eredm[i].ponta;
+			maxcs = eredm[i].csapata;
+		}
+		if (eredm[i].pontb > max)
+		{
+			max = eredm[i].pontb;
+			maxcs = eredm[i].csapatb;
+		}
+	}
+	cout << "legtöbb gólos csapat: " << maxcs << endl;
+
+	i = 0;
+	while (i < pontsz && eredm[i].ponta != eredm[i].pontb)
+	{
+		i++;
+	}
+	if (i < pontsz)
+	{
+		cout << "\n volt döntetlen mérközés" << endl;
+	}
+	i = 0;
+	
+	i = 0;
+	while (eredm[i].csapata != "Haladas" && eredm[i].csapatb != "Haladas")
+	{
+		i++;
+	}
+		if (eredm[i].csapata == "Haladas")
+		{
+			cout << eredm[i].ponta;
+		}
+		else
+		{
+			cout << eredm[i].pontb;
+		}
+		cout << " gólt lött a Haladás" << endl;
+	
+		string seged[16];
+		string temp;
+		int j = 0;
+		for ( i = 0; i < pontsz; i++)
+		{
+			seged[j] = eredm[i].csapata;
+			j++;
+			seged[j] = eredm[i].csapatb;
+		}
+
+		for ( i = 0; i < pontsz*2-1; i++)
+		{
+			for ( j = 1; j < pontsz*2; j++)
+			{
+				if (seged[i] > seged[j])
+				{
+					temp = seged[i];
+					seged[i] = seged[j];
+					seged[j] = temp;
+
+				}
+			}
+		}
+		ofstream ki("csapatok.txt");
+		if (ki.fail())
+		{
+			cerr << "hiba";
+			system("pause");
+			exit(1);
+		}
+		for ( i = 0; i < pontsz*2; i++)
+		{
+			cout << seged[i] << endl;
+			ki << seged[i] << endl;
+		}
+	return 0;
+}
